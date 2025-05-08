@@ -8,7 +8,7 @@ app.secret_key = 'supersecretkey'
 USER_DB = 'users.db'
 WINS_DB = 'wins.db'
 
-# --- Helpers ---
+# kinda sets up the user database if it's not already there
 def init_user_db():
     with sqlite3.connect(USER_DB) as conn:
         c = conn.cursor()
@@ -20,6 +20,7 @@ def init_user_db():
                     )''')
         conn.commit()
 
+# same thing but for the wins data
 def init_wins_db():
     with sqlite3.connect(WINS_DB) as conn:
         c = conn.cursor()
@@ -34,7 +35,7 @@ def init_wins_db():
                     )''')
         conn.commit()
 
-# --- Routes ---
+# main page stuff
 @app.route('/')
 def index():
     if 'user_id' in session:
@@ -43,6 +44,7 @@ def index():
         return redirect(url_for('dashboard'))
     return render_template('login.html')
 
+# for new users to register
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -61,6 +63,7 @@ def register():
             return 'Username already exists', 400
     return render_template('register.html')
 
+# handles logging in
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form['username']
@@ -78,6 +81,7 @@ def login():
             return redirect(url_for('dashboard'))
     return 'Invalid credentials', 401
 
+# shows user their stuff
 @app.route('/dashboard')
 def dashboard():
     if 'user_id' not in session or 'username' not in session:
@@ -89,6 +93,7 @@ def dashboard():
         auctions = c.fetchall()
     return render_template('dashboard.html', auctions=auctions)
 
+# admin stuff page
 @app.route('/admin', methods=['GET', 'POST'])
 def admin_panel():
     if session.get('username') != 'admin':
@@ -115,6 +120,7 @@ def admin_panel():
 
     return render_template('admin_panel.html', users=users)
 
+# logs u out
 @app.route('/logout')
 def logout():
     session.clear()
@@ -127,5 +133,5 @@ if __name__ == '__main__':
         init_wins_db()
     app.run(host='0.0.0.0', port=10000, debug=True)
 
-
+# not sure what this was for but keeping it
 #testing git imp
