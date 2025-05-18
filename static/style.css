@@ -1,26 +1,35 @@
+/* Base body styles */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #121212;
+  /* Dark background */
   color: #e0e0e0;
+  /* Light text */
   margin: 0;
   padding: 0;
 }
 
+/* Main container for layout */
 .container {
   max-width: 600px;
   margin: 50px auto;
   background: #1e1e1e;
+  /* Slightly lighter dark background */
   border-radius: 12px;
   padding: 30px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  /* Soft shadow */
 }
 
+/* Header styling */
 h2 {
   margin-bottom: 20px;
   font-weight: 600;
   color: #ffffff;
+  /* Pure white heading */
 }
 
+/* Form input fields */
 form input,
 form textarea,
 form select {
@@ -28,29 +37,37 @@ form select {
   padding: 12px;
   margin-bottom: 15px;
   background: #2a2a2a;
+  /* Input background */
   border: 1px solid #444;
   border-radius: 8px;
   color: #e0e0e0;
   font-size: 15px;
 }
 
+/* Button styles */
 button {
   padding: 12px 20px;
   background: #2962ff;
+  /* Blue background */
   color: white;
   border: none;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease;
+  /* Smooth hover transition */
 }
 
+/* Button hover effect */
 button:hover {
   background: #0039cb;
+  /* Darker blue on hover */
 }
 
+/* Link styles */
 a {
   color: #82aaff;
+  /* Light blue links */
   text-decoration: none;
 }
 
@@ -58,6 +75,7 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Auction card layout */
 .auction-card {
   border: 1px solid #333;
   padding: 15px;
@@ -66,6 +84,7 @@ a:hover {
   border-radius: 8px;
 }
 
+/* Image inside auction card */
 .auction-card img {
   max-width: 100%;
   height: auto;

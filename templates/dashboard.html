@@ -1,28 +1,135 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+  <meta charset="UTF-8">
   <title>Dashboard - Robinsons Auctioneers</title>
+
+  <!-- Link to external stylesheet -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <!-- Internal styles for page layout and theme -->
+  <style>
+    /* Global box-sizing reset */
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Page background and default text styles */
+    body,
+    html {
+      background-color: #0f1e0f;
+      font-family: 'Consolas', monospace;
+      color: #00ff00;
+    }
+
+    /* Main container styling */
+    .container {
+      max-width: fit-content;
+      padding: 1rem;
+      text-align: center;
+      border: 2px solid #00ff00;
+      box-shadow: 0 0 2px #00ff00;
+      background: #1a331a;
+      border-radius: 0;
+      height: 100%;
+    }
+
+    /* Header style */
+    h2 {
+      font-size: 2rem;
+      color: #00ff00;
+      text-shadow: 0 0 2px #00ff00;
+    }
+
+    /* Flex layout for auction cards */
+    .auctions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    /* Individual auction card styling */
+    .auction-card {
+      background-color: #1a331a;
+      border: 0 solid #00ff00;
+      box-shadow: 0 0 0 #00ff00;
+      padding: 0.5rem;
+      width: 250px;
+      text-align: left;
+      color: #00ff00;
+      text-shadow: 0 0 2px #00ff00;
+      border-radius: 0;
+    }
+
+    /* Image inside auction card */
+    .auction-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: fill;
+      border: 2px solid #00ff00;
+      margin-bottom: 0;
+      border-radius: 0;
+      box-shadow: 0 0 2px #00ff00;
+    }
+
+    /* Title of auction item */
+    .auction-card h3 {
+      margin: 0.5rem 0;
+      font-size: 1.25rem;
+      text-align: center;
+    }
+
+    /* Description and bid info */
+    .auction-card p {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    /* Message when no auction winnings are found */
+    .no-wins {
+      font-size: 1.25rem;
+      color: #00ff00;
+      text-shadow: 0 0 2px #00ff00;
+    }
+
+    /* Logout link style */
+    a.logout {
+      color: #00ff00;
+      text-decoration: underline;
+      text-shadow: 0 0 2px #00ff00;
+    }
+  </style>
 </head>
+
 <body>
   <div class="container">
-    <h2>Your Auction Wins</h2>
-    <a href="/logout">Logout</a>
+    <h2>AUCTION WINNINGS</h2>
+
+    <!-- If there are auctions, display them -->
     {% if auctions %}
-      <div class="auctions">
-        {% for auction in auctions %}
-          <div class="auction-card">
-            <img src="{{ auction[2] }}" alt="{{ auction[0] }}">
-            <h3>{{ auction[0] }}</h3>
-            <p>{{ auction[1] }}</p>
-            <p><strong>Date:</strong> {{ auction[3] }}</p>
-            <p><strong>Final Bid:</strong> £{{ auction[4] }}</p>
-          </div>
-        {% endfor %}
+    <div class="auctions">
+      {% for auction in auctions %}
+      <div class="auction-card">
+        <!-- Image, title, description, date, and bid -->
+        <img src="{{ auction[2] }}" alt="{{ auction[0] }}">
+        <h3>{{ auction[0] }}</h3>
+        <p>{{ auction[1] }}</p>
+        <p><strong>Date:</strong> {{ auction[3] }}</p>
+        <p><strong>Final Bid:</strong> £{{ auction[4] }}</p>
       </div>
+      {% endfor %}
+    </div>
     {% else %}
-      <p>No auction wins found.</p>
+    <!-- Fallback message if no winnings -->
+    <p class="no-wins">NO AUCTION WINNINGS</p>
     {% endif %}
+
+    <!-- Logout link -->
+    <a href="/logout" class="logout">LOGOUT</a>
   </div>
 </body>
+
 </html>
